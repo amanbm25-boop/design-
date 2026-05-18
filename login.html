@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>लॉगिन — Meri Pehli Website</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <main class="container" aria-labelledby="pageTitle">
+    <section class="card" role="region" aria-label="लॉगिन फ़ॉर्म">
+      <h1 id="pageTitle">स्वागत है</h1>
+      <p class="lead">कृपया अपने खाते में लॉगिन करें</p>
+
+      <form id="loginForm" novalidate>
+        <label for="user">ई‑मेल या उपयोगकर्ता नाम</label>
+        <input id="user" name="user" type="text" required placeholder="name@example.com" autocomplete="username">
+
+        <label for="password">पासवर्ड</label>
+        <div class="password-wrap">
+          <input id="password" name="password" type="password" required minlength="6" placeholder="कम से कम 6 अक्षर" autocomplete="current-password">
+          <button type="button" id="togglePwd" aria-label="पासवर्ड दिखाएँ" title="पासवर्ड दिखाएँ">👁️</button>
+        </div>
+
+        <div class="row">
+          <label class="checkbox"><input type="checkbox" name="remember"> मुझे याद रखें</label>
+          <a class="forgot" href="#" aria-label="पासवर्ड रीसेट">पासवर्ड भूल गए?</a>
+        </div>
+
+        <button class="btn" type="submit">लॉगिन</button>
+      </form>
+
+      <p class="signup">नया उपयोगकर्ता? <a href="index.html">पोर्टफोलियो पर वापस जाएँ</a></p>
+    </section>
+  </main>
+
+  <script src="login.js"></script>
+</body>
+</html>
