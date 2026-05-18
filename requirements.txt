@@ -1,0 +1,7 @@
+# Python requirements for MiDaS Depthmap app
+# NOTE: Install torch/torchvision separately depending on your machine (CPU vs CUDA).
+flask
+opencv-python
+pillow
+numpy
+tifffile
