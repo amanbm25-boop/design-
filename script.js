@@ -1,11 +1,11 @@
 // script.js
 // Assumptions:
 // - Model is ONNX and expects input shape [1,3,H,W] (NCHW).
-// - Use a MiDaS small/DPT_small exported to ONNX (recommended input size 384x384 or 256x256).
+// - Using midas_v21_small_256 by default (input size 256).
 // - Model URL must be CORS-enabled.
 
 let session = null;
-let modelInputSize = 384; // change if your exported model uses different size
+let modelInputSize = 256; // updated for midas_v21_small_256
 const mean = [0.485, 0.456, 0.406];
 const std = [0.229, 0.224, 0.225];
 
@@ -57,11 +57,8 @@ runBtn.addEventListener('click', async () => {
   try {
     const inputTensor = preprocess(loadedImage, modelInputSize);
     const feeds = {};
-    // assume first input name
-    const inputName = session.inputNames ? session.inputNames[0] : session.inputNames;
     feeds[session.inputNames[0]] = inputTensor;
     const results = await session.run(feeds);
-    // assume single output
     const output = results[session.outputNames[0]];
     const depthData = postprocessDepth(output.data, output.dims, loadedImage.width, loadedImage.height);
     drawDepth(depthData.map, loadedImage.width, loadedImage.height);
@@ -220,6 +217,6 @@ function jetColor(v) {
   const fourValue = 4 * v;
   const r = Math.min(255, Math.max(0, Math.round(255 * Math.min(fourValue - 1.5, -fourValue + 4.5))));
   const g = Math.min(255, Math.max(0, Math.round(255 * Math.min(fourValue - 0.5, -fourValue + 3.5))));
-  const b = Math.min(255, Math.max(0, Math.round(255 * Math.min(fourValue + 0.5, -fourValue + 2.5)))));
+  const b = Math.min(255, Math.max(0, Math.round(255 * Math.min(fourValue + 0.5, -fourValue + 2.5))));
   return [r,g,b];
 }
