@@ -3,27 +3,51 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Meri Pehli Website</title>
+  <title>MiDaS Client-side Demo</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
-    <h1>Namaste — Mera Portfolio</h1>
-    <p>Yeh ek simple static page ka example hai.</p>
+    <h1>MiDaS Depth Demo (Client-side)</h1>
+    <p>Image upload karo — browser mein depth map generate hoga (agar model ONNX hosted hai).</p>
   </header>
 
   <main>
-    <section>
-      <h2>Mere Projects</h2>
-      <ul>
-        <li>Project A</li>
-        <li>Project B</li>
-      </ul>
+    <section class="controls">
+      <label class="file-label">
+        <input id="imageInput" type="file" accept="image/*">
+        Choose image
+      </label>
+
+      <div class="options">
+        <label>
+          Model URL:
+          <input id="modelUrl" type="text" value="https://example.com/model.onnx" style="width:420px">
+        </label>
+        <button id="loadModelBtn">Load Model</button>
+      </div>
+
+      <div id="status">Model not loaded</div>
+    </section>
+
+    <section class="canvas-area">
+      <canvas id="origCanvas"></canvas>
+      <canvas id="depthCanvas"></canvas>
+      <canvas id="overlayCanvas"></canvas>
+    </section>
+
+    <section class="actions">
+      <button id="runBtn" disabled>Run Inference</button>
+      <button id="downloadBtn" disabled>Download Depth</button>
     </section>
   </main>
 
   <footer>
     <p>© 2026 — Aapka Naam</p>
   </footer>
+
+  <!-- ONNX Runtime Web from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
