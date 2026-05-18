@@ -22,7 +22,8 @@ os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Load MiDaS model (will download on first run)
-model_type = "DPT_Large"  # options: "DPT_Large", "DPT_Hybrid", "MiDaS_small"
+# For CPU-friendly demo we use MiDaS_small by default. Change to DPT_Large for higher quality (GPU recommended).
+model_type = "MiDaS_small"  # options: "DPT_Large", "DPT_Hybrid", "MiDaS_small"
 print(f"Loading MiDaS model ({model_type}) to device: {device}")
 midas = torch.hub.load("intel-isl/MiDaS", model_type)
 midas.to(device)
@@ -108,4 +109,4 @@ def download(filename):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
