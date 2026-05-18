@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MiDaS AI Depthmap Generator</title>
+
+    <style>
+        body {
+            background: #111;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .box {
+            background: #1c1c1c;
+            padding: 30px;
+            border-radius: 15px;
+            width: 500px;
+            margin: auto;
+        }
+
+        input {
+            margin: 20px;
+        }
+
+        button {
+            background: #00aaff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        img {
+            margin-top: 20px;
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .flash {
+            color: #ffcc00;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h1>MiDaS AI Depthmap Generator</h1>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flash">
+              {% for msg in messages %}
+                <div>{{ msg }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="image" accept="image/*" required>
+            <br>
+            <button type="submit">Generate Depthmap</button>
+        </form>
+
+        {% if depthmap_filename %}
+            <h2>Depthmap Result</h2>
+            <img src="/static/output/{{ depthmap_filename }}" alt="Depthmap">
+            <br><br>
+            <a href="{{ url_for('download', filename=depthmap_filename) }}">
+                <button>Download PNG</button>
+            </a>
+        {% endif %}
+    </div>
+
+</body>
+</html>
